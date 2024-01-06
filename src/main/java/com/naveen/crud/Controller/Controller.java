@@ -2,44 +2,45 @@ package com.naveen.crud.Controller;
 
 
 import com.naveen.crud.Entity.Student;
-import com.naveen.crud.service.StudentService;
+import com.naveen.crud.service.StudentImplement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
 @RestController
-@RequestMapping("/CRUD")
+@RequestMapping("/crud")
 public class Controller  {
 
     @Autowired
-    StudentService service;
+    StudentImplement service;
 
     @GetMapping("/students")
     public List<Student>  getStudent()
     {
 
-        return service.getStudent();
+        return service.fetchAll();
     }
-    @GetMapping("students/{studentId}")
-    public Student getStudentByID(@PathVariable int studentId)
+    @GetMapping("students/{Id}")
+    public Student getStudentByID(@PathVariable int Id)
     {
-        return service.getStudentById(studentId);
+        return service.fetchById(Id);
     }
     @PostMapping("/students")
     public String setStudent(@RequestBody Student student)
     {
-        return  service.setStudent(student);
+        return  service.store(student);
     }
-    @PutMapping("/students")
-    public String updateStudent(@RequestBody Student student)
+    @PutMapping("/students/{id}")
+    public String updateStudent(@RequestBody Student student,@PathVariable int id)
     {
-        return service.putStudent(student);
+
+        return service.updateStudent(id,student);
     }
-    @DeleteMapping("students/{studentId}")
-    public String DeleteStudent(@PathVariable int studentId)
+    @DeleteMapping("students/{Id}")
+    public String DeleteStudent(@PathVariable int Id)
     {
-        return service.deleteStudent(studentId);
+        return service.deleteStudent(Id);
     }
 
 }
