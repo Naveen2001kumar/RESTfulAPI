@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface StudentRepo extends JpaRepository<Student , Integer>
 {
-
+    boolean existsStudentByName(String name);
 }

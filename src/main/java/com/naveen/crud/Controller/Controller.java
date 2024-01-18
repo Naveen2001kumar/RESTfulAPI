@@ -18,7 +18,6 @@ public class Controller  {
     @GetMapping("/students")
     public List<Student>  getStudent()
     {
-
         return service.fetchAll();
     }
     @GetMapping("students/{Id}")
